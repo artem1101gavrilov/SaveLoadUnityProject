@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour {
     string[] fileEntries;
     List<SaveData> listData;
     public GameObject PrefabLoadButoonInfo;
+    Ref<float> lala = new Ref<float>(0);
 
     private void Awake()
     {
@@ -59,6 +60,12 @@ public class MainMenu : MonoBehaviour {
         }
     }
 
+    public void Start()
+    {
+        StartCoroutine(ForCor.Example(lala));
+        InvokeRepeating("exampleLog", 5, 5);
+    }
+
     public void СontinueGame()
     {
         UserData.instance.SaveDataToUserData(listData[0]);
@@ -81,5 +88,10 @@ public class MainMenu : MonoBehaviour {
         Debug.Log(index);
         UserData.instance.SaveDataToUserData(listData[index]);
         SceneManager.LoadScene(listData[index].currentSceneID);
+    }
+
+    void exampleLog()
+    {
+        Debug.Log("float = " + lala.Value);
     }
 }
