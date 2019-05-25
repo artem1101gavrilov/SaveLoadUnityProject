@@ -7,12 +7,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [Serializable]
-public class SaveData{
-    float positionX;
-    float positionY;
-    float positionZ;
-    float currentSceneID;
-    string name;
+public class SaveData : IComparable
+{
+    public float positionX;
+    public float positionY;
+    public float positionZ;
+    public int currentSceneID;
+    public string name;
+    public DateTime dataTime;
 
     public SaveData(Vector3 position, string namePerson)
     {
@@ -21,6 +23,7 @@ public class SaveData{
         positionZ = position.z;
         currentSceneID = SceneManager.GetActiveScene().buildIndex;
         name = namePerson;
+        dataTime = DateTime.Now;
         SaveGame();
     }
 
@@ -31,5 +34,11 @@ public class SaveData{
         BinaryFormatter bformatter = new BinaryFormatter();
         bformatter.Serialize(fs, this);
         fs.Close();
+    }
+
+    public int CompareTo(object o)
+    {
+        SaveData rec = (SaveData)o;
+        return this.dataTime.CompareTo(rec.dataTime);
     }
 }

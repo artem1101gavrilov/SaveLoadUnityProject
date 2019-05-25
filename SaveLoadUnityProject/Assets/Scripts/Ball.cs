@@ -9,7 +9,7 @@ public class Ball : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+        transform.position = UserData.instance.positionBall;
 	}
 	
 	// Update is called once per frame

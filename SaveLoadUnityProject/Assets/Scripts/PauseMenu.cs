@@ -24,7 +24,7 @@ public class PauseMenu : MonoBehaviour {
         Debug.Log("Save Game");
         if (Ball != null)
         {
-            SaveData data = new SaveData(Ball.transform.position, "123");
+            SaveData data = new SaveData(Ball.transform.position, UserData.instance.namePlayer);
         }
     }
 }
